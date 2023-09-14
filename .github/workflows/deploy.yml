@@ -57,20 +57,20 @@ jobs:
     needs: build-backend
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: app.jar
           path: backend/target
 
       - name: Login to DockerHub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           #Set dockerhub username
           username: ben21
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           push: true
           #Set dockerhub project (replace "bartfastiel/deploy-to-aws-with-github-actions")
