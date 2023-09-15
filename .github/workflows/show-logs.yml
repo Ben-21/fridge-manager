@@ -16,7 +16,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           #Set App Name (replace "example" with "alpha"-"tango")
           script: |
-            sudo docker logs fridge-manager
+            sudo -S docker logs fridge-manager
       - name: Check the deployed service URL
         uses: jtalk/url-health-check-action@v3
         with:
