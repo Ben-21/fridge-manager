@@ -47,6 +47,7 @@ jobs:
       - name: Build with maven
         run: mvn -B package --file backend/pom.xml
 
+      #Set backend/target/"MyApp".jar
       - uses: actions/upload-artifact@v3
         with:
           name: app.jar
