@@ -86,7 +86,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           #Set hostname of your AWS EC2 instance
-          host: 164.90.173.123
+          host: fridge-manager.schaefer-inet.de
           #Set App Name ("myapp" - "tango")
           username: ben
           password: ${{ secrets.SSH_PASSWORD }}
@@ -102,7 +102,7 @@ jobs:
         uses: jtalk/url-health-check-action@v3
         with:
           #Set URL of your AWS EC2 instance
-          url: http://164.90.173.123
+          url: http://fridge-manager.schaefer-inet.de
           max-attempts: 3
           retry-delay: 5s
           retry-all: true
