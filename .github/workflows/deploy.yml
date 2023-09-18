@@ -92,7 +92,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           #Set App Name ("myapp" - "tango")
           #Set dockerhub project (replace "bartfastiel/deploy-to-aws-with-github-actions")
-          run: |
+          script: |
             cd /home/ben/services/
             docker-compose pull  # Pull the latest images
             docker-compose down  # Stop and remove containers
