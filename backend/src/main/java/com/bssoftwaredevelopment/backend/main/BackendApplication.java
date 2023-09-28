@@ -1,4 +1,4 @@
-package com.bssoftwaredevelopment.backend;
+package com.bssoftwaredevelopment.backend.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
