@@ -77,7 +77,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/BackendApplication.class</exclude>
+                        <exclude>com/bssoftwaredevelopment/backend/main/**/BackendApplication.class</exclude>
                     </excludes>
                 </configuration>
             </plugin>
