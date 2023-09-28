@@ -60,6 +60,11 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.10</version>
+                <configuration>
+                    <excludes>
+                        <exclude>com/bssoftwaredevelopment/backend/main/**/BackendApplication.java</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>jacoco-initialize</id>
@@ -75,11 +80,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <excludes>
-                        <exclude>src/main/java/com/bssoftwaredevelopment/backend/main/**/BackendApplication.class</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>
