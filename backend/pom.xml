@@ -62,7 +62,7 @@
                 <version>0.8.10</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/bssoftwaredevelopment/backend/main/**/BackendApplication.java</exclude>
+                        <exclude>com/bssoftwaredevelopment/backend/mainapp/**/BackendApplication.java</exclude>
                     </excludes>
                 </configuration>
                 <executions>
