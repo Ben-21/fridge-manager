@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FridgeManagerServiceTest {
+class FridgeManagerWebclientTest {
 
-    private final FridgeManagerService getAllImageInfos = new FridgeManagerService();
+    private final FridgeManagerWebclient fridgeManagerWebclient = new FridgeManagerWebclient();
 
     @Test
     void getImageUrl_whenSendBarcode() {
@@ -15,9 +15,10 @@ class FridgeManagerServiceTest {
         String expectedImageUrl = "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg";
 
         //When
-        String actual = getAllImageInfos.getProductImageUrl(barcode);
+        String actual = fridgeManagerWebclient.getProductImageUrl(barcode);
 
         //Then
         assertEquals(expectedImageUrl, actual);
     }
+
 }
