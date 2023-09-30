@@ -7,8 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class GetAllImageInfosTest {
 
     private final GetAllImageInfos getAllImageInfos = new GetAllImageInfos();
+
     @Test
-    void getImageUrl_whenSendBarcode(){
+    void getImageUrl_whenSendBarcode() {
         //Given
         String barcode = "737628064502";
         String expectedImageUrl = "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg";
@@ -18,14 +19,5 @@ class GetAllImageInfosTest {
 
         //Then
         assertEquals(expectedImageUrl, actual);
-    }
-
-    @Test
-    void getString() {
-        String expected = "Test String";
-
-        String actual = getAllImageInfos.getString();
-
-        assertEquals(expected, actual);
     }
 }

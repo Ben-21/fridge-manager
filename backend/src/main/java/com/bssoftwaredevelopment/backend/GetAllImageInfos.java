@@ -8,15 +8,9 @@ import pl.coderion.service.impl.OpenFoodFactsWrapperImpl;
 public class GetAllImageInfos {
 
 
-
-
-    public String getProductImageUrl(String barcode){
+    public String getProductImageUrl(String barcode) {
         OpenFoodFactsWrapper wrapper = new OpenFoodFactsWrapperImpl();
         ProductResponse productResponse = wrapper.fetchProductByCode(barcode);
         return productResponse.getProduct().getImageUrl();
-    }
-
-    public String getString(){
-        return "Test String";
     }
 }
