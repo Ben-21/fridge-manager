@@ -1,6 +1,6 @@
 package com.bssoftwaredevelopment.backend.models;
 
-public record TestModelProduct(
+public record OpenFoodFactsItem(
         String code,
         OpenFoodFactsProduct product
 
