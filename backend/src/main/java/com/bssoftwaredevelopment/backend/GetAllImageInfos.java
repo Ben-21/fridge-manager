@@ -1,16 +1,25 @@
 package com.bssoftwaredevelopment.backend;
 
 
-import pl.coderion.model.ProductResponse;
-import pl.coderion.service.OpenFoodFactsWrapper;
-import pl.coderion.service.impl.OpenFoodFactsWrapperImpl;
+import com.bssoftwaredevelopment.backend.models.TestModelProduct;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.Objects;
+
 
 public class GetAllImageInfos {
 
+    private final WebClient webClient = WebClient.create("https://world.openfoodfacts.org/api/v2/product/");
 
     public String getProductImageUrl(String barcode) {
-        OpenFoodFactsWrapper wrapper = new OpenFoodFactsWrapperImpl();
-        ProductResponse productResponse = wrapper.fetchProductByCode(barcode);
-        return productResponse.getProduct().getImageUrl();
+        ResponseEntity<TestModelProduct> responseEntity = webClient.get()
+                .uri(barcode)
+                .retrieve()
+                .toEntity(TestModelProduct.class)
+                .block();
+
+        assert responseEntity != null;
+        return Objects.requireNonNull(responseEntity.getBody()).product().image_url();
     }
 }
