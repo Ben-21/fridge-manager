@@ -1,14 +1,14 @@
 package com.bssoftwaredevelopment.backend;
 
-
 import com.bssoftwaredevelopment.backend.models.TestModelProduct;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Objects;
 
-
-public class GetAllImageInfos {
+@Component
+public class FridgeManagerWebclient {
 
     private final WebClient webClient = WebClient.create("https://world.openfoodfacts.org/api/v2/product/");
 

@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GetAllImageInfosTest {
+class FridgeManagerServiceTest {
 
-    private final GetAllImageInfos getAllImageInfos = new GetAllImageInfos();
+    private final FridgeManagerService getAllImageInfos = new FridgeManagerService();
 
     @Test
     void getImageUrl_whenSendBarcode() {
