@@ -12,7 +12,7 @@ public class FridgeManagerWebclient {
 
     private final WebClient webClient = WebClient.create("https://world.openfoodfacts.org/api/v2/product/");
 
-    public String getProductImageUrl(String barcode) {
+      public OpenFoodFactsItem getOpenFoodFactsProduct(String barcode) {
         ResponseEntity<OpenFoodFactsItem> responseEntity = webClient.get()
                 .uri(barcode)
                 .retrieve()
@@ -20,6 +20,6 @@ public class FridgeManagerWebclient {
                 .block();
 
         assert responseEntity != null;
-        return Objects.requireNonNull(responseEntity.getBody()).product().image_url();
+        return Objects.requireNonNull(responseEntity.getBody());
     }
 }
