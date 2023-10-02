@@ -15,7 +15,7 @@ class FridgeManagerServiceTest {
     FridgeManagerWebclient fridgeManagerWebclient = mock(FridgeManagerWebclient.class);
     FridgeManagerService fridgeManagerService = new FridgeManagerService(fridgeManagerRepo, uuIdService, fridgeManagerWebclient);
 
-    private ItemToCreate itemToCreate = new ItemToCreate(
+    private final ItemToCreate itemToCreate = new ItemToCreate(
             "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
             "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
             StorageLocation.FRIDGE,
