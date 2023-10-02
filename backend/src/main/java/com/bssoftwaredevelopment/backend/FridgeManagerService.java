@@ -1,5 +1,7 @@
 package com.bssoftwaredevelopment.backend;
 
+import com.bssoftwaredevelopment.backend.models.Item;
+import com.bssoftwaredevelopment.backend.models.ItemToCreate;
 import com.bssoftwaredevelopment.backend.models.OpenFoodFactsItem;
 import com.bssoftwaredevelopment.backend.services.UuIdService;
 import lombok.RequiredArgsConstructor;
@@ -16,5 +18,19 @@ public class FridgeManagerService {
     public OpenFoodFactsItem fetchOpenFoodFactsItem(String barcode) {
 
         return fridgeManagerWebclient.getOpenFoodFactsItem(barcode);
+    }
+
+    public Item createItem(ItemToCreate itemToCreate){
+        Item newItem = new Item(
+                uuIdService.createId(),
+                itemToCreate.name(),
+                itemToCreate.imageUrl(),
+                itemToCreate.storageLocation(),
+                itemToCreate.stockAmount(),
+                itemToCreate.warnStockAmount(),
+                itemToCreate.stockUnit(),
+                itemToCreate.quantity()
+        );
+        return fridgeManagerRepo.insert(newItem);
     }
 }

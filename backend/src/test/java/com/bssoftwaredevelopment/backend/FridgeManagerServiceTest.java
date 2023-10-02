@@ -35,4 +35,6 @@ class FridgeManagerServiceTest {
         //Then
         assertEquals(openFoodFactsItem, actualItem);
     }
+
+
 }
