@@ -19,7 +19,7 @@ class FridgeManagerIntegrationTest {
     @Autowired
     MockMvc mockMvc;
 
-
+    @Autowired
     FridgeManagerService fridgeManagerService;
 
 
