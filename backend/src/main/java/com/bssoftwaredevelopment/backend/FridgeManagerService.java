@@ -4,10 +4,9 @@ import com.bssoftwaredevelopment.backend.models.Item;
 import com.bssoftwaredevelopment.backend.models.ItemToCreate;
 import com.bssoftwaredevelopment.backend.models.OpenFoodFactsItem;
 import com.bssoftwaredevelopment.backend.services.UuIdService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
+
 @Service
 public class FridgeManagerService {
 
@@ -15,12 +14,19 @@ public class FridgeManagerService {
     private final UuIdService uuIdService;
     private final FridgeManagerWebclient fridgeManagerWebclient;
 
+
+    public FridgeManagerService(FridgeManagerRepo fridgeManagerRepo, UuIdService uuIdService, FridgeManagerWebclient fridgeManagerWebclient) {
+        this.fridgeManagerRepo = fridgeManagerRepo;
+        this.uuIdService = uuIdService;
+        this.fridgeManagerWebclient = fridgeManagerWebclient;
+    }
+
     public OpenFoodFactsItem fetchOpenFoodFactsItem(String barcode) {
 
         return fridgeManagerWebclient.getOpenFoodFactsItem(barcode);
     }
 
-    public Item createItem(ItemToCreate itemToCreate){
+    public Item createItem(ItemToCreate itemToCreate) {
         Item newItem = new Item(
                 uuIdService.createId(),
                 itemToCreate.name(),
