@@ -22,7 +22,7 @@ class FridgeManagerWebclientTest {
 
 
         //When
-        OpenFoodFactsItem actualItem = fridgeManagerWebclient.getOpenFoodFactsProduct(barcode);
+        OpenFoodFactsItem actualItem = fridgeManagerWebclient.getOpenFoodFactsItem(barcode);
 
         //Then
         assertEquals(expectedItem, actualItem);

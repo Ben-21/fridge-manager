@@ -12,7 +12,7 @@ public class FridgeManagerWebclient {
 
     private final WebClient webClient = WebClient.create("https://world.openfoodfacts.org/api/v2/product/");
 
-      public OpenFoodFactsItem getOpenFoodFactsProduct(String barcode) {
+      public OpenFoodFactsItem getOpenFoodFactsItem(String barcode) {
         ResponseEntity<OpenFoodFactsItem> responseEntity = webClient.get()
                 .uri(barcode)
                 .retrieve()

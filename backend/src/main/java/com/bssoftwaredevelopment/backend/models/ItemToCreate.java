@@ -1,18 +1,14 @@
 package com.bssoftwaredevelopment.backend.models;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("items")
-public record Item(
-        @Id
-        String id,
+
+public record ItemToCreate(
         String name,
         String imageUrl,
         StorageLocation storageLocation,
         int stockAmount,
         int warnStockAmount,
-        StockUnit StockUnit,
+        StockUnit stockUnit,
         String quantity
 ) {
 }
