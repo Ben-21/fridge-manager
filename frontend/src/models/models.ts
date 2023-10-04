@@ -24,7 +24,12 @@ export type OpenFoodFactsItem = {
     product: OpenFoodFactsProduct
 }
 
-
+export type OpenFoodFactsProduct = {
+    id: string,
+    product_name: string,
+    image_url: string,
+    quantity: string
+}
 
 export enum StorageLocation {
     FRIDGE = "Fridge",
@@ -38,9 +43,3 @@ export enum StockUnit {
     MILLILITER = "Milliliter"
 }
 
-export enum OpenFoodFactsProduct {
-    _ID = "-Id",
-    PRODUCT_NAME = "Product Name",
-    IMAGE_URL = "Image Url",
-    QUANTITY = "Quantity"
-}
