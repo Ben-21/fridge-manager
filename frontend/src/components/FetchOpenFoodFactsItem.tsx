@@ -18,7 +18,6 @@ export default function FetchOpenFoodFactsItem() {
     }, [openFoodFactsItem])
 
     function fetchOpenFoodFactsItem(barcode: string) {
-
         axios
             .get("/api/items/openfoodapi/" + barcode)
             .then((response) => response.data)
