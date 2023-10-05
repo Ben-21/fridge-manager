@@ -1,12 +1,12 @@
 import './App.css'
-import FetchOpenFoodFactsItem from "./components/FetchOpenFoodFactsItem.tsx";
+import AddEditItem from "./pages/AddEditItem.tsx";
 
 function App() {
 
 
     return (
         <>
-            <FetchOpenFoodFactsItem/>
+            <AddEditItem/>
         </>
     )
 }
