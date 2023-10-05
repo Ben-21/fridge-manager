@@ -26,9 +26,14 @@ public class FridgeManagerService {
         return fridgeManagerWebclient.getOpenFoodFactsItem(barcode);
     }
 
+    public Item fetchItemByBarcode(String barcode){
+        return fridgeManagerRepo.findByBarcode(barcode);
+    }
+
     public Item createItem(ItemToCreate itemToCreate) {
         Item newItem = new Item(
                 uuIdService.createId(),
+                itemToCreate.barcode(),
                 itemToCreate.name(),
                 itemToCreate.imageUrl(),
                 itemToCreate.storageLocation(),

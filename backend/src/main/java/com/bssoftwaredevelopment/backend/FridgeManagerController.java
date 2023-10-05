@@ -1,5 +1,6 @@
 package com.bssoftwaredevelopment.backend;
 
+import com.bssoftwaredevelopment.backend.models.Item;
 import com.bssoftwaredevelopment.backend.models.OpenFoodFactsItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,5 +19,10 @@ public class FridgeManagerController {
     @GetMapping("/openfoodapi/{barcode}")
     public OpenFoodFactsItem fetchOpenFoodFactsItem(@PathVariable String barcode){
         return fridgeManagerService.fetchOpenFoodFactsItem(barcode);
+    }
+
+    @GetMapping("/{barcode}")
+    public Item fetchItemByBarcode(@PathVariable String barcode){
+        return fridgeManagerService.fetchItemByBarcode(barcode);
     }
 }
