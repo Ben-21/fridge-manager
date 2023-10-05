@@ -1,5 +1,6 @@
 import axios from "axios";
 import {Item} from "../models/models.ts";
+import {toast} from "react-toastify";
 
 
 type Props = {
@@ -15,8 +16,12 @@ export default function FetchItem(props: Props) {
             .then((response) => response.data)
             .then((data) => {
                 props.fetchData(data);
+                toast.success("Found Product")
             })
-            .catch(console.error)
+            .catch((error) => {
+                toast.error("No Product found");
+                console.log(error);
+            })
     }
 
 
