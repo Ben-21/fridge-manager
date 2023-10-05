@@ -11,17 +11,21 @@ type Props = {
 export default function FetchItem(props: Props) {
 
     function fetchItem(barcode: string) {
-        axios
-            .get("/api/items/" + barcode)
-            .then((response) => response.data)
-            .then((data) => {
-                props.fetchData(data);
-                toast.success("Found Product")
-            })
-            .catch((error) => {
-                toast.error("No Product found");
-                console.log(error);
-            })
+        if (barcode === "") {
+            toast.error("Please enter a barcode");
+        } else {
+            axios
+                .get("/api/items/" + barcode)
+                .then((response) => response.data)
+                .then((data) => {
+                    props.fetchData(data);
+                    toast.success("Found Product")
+                })
+                .catch((error) => {
+                    toast.error("No Product found");
+                    console.log(error);
+                })
+        }
     }
 
 
