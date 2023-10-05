@@ -1,15 +1,13 @@
-import {useState} from "react";
 import axios from "axios";
 import {OpenFoodFactsItem} from "../models/models.ts";
 
 
 type Props = {
     fetchData: (childData: OpenFoodFactsItem) => void;
+    barcode: string;
 }
 
 export default function FetchOpenFoodFactsItem(props: Props) {
-
-    const [barcode, setBarcode] = useState<string>("");
 
 
     function fetchOpenFoodFactsItem(barcode: string) {
@@ -25,9 +23,7 @@ export default function FetchOpenFoodFactsItem(props: Props) {
 
     return (
         <form id="barcodeForm">
-            Barcode:
-            <input name="barcode" type="text" value={barcode} onChange={(event) => setBarcode(event.target.value)}/>
-            <button type={"button"} onClick={() => fetchOpenFoodFactsItem(barcode)}>Search</button>
+            <button type={"button"} onClick={() => fetchOpenFoodFactsItem(props.barcode)}>Search OpenFoodFacts Api</button>
         </form>
     )
 }
