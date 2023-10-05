@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public record Item(
         @Id
         String id,
+        String barcode,
         String name,
         String imageUrl,
         StorageLocation storageLocation,
