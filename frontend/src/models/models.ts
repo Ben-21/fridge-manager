@@ -1,5 +1,6 @@
 export type Item = {
     id: string,
+    barcode: string,
     name: string,
     imageUrl: string,
     storageLocation: StorageLocation,
@@ -10,6 +11,7 @@ export type Item = {
 }
 
 export type ItemToCreate = {
+    barcode: string,
     name: string,
     imageUrl: string,
     storageLocation: StorageLocation,
