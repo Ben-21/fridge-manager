@@ -1,5 +1,6 @@
 package com.bssoftwaredevelopment.backend;
 
+import com.bssoftwaredevelopment.backend.customexceptions.ProductNotFoundException;
 import com.bssoftwaredevelopment.backend.models.Item;
 import com.bssoftwaredevelopment.backend.models.ItemToCreate;
 import com.bssoftwaredevelopment.backend.models.OpenFoodFactsItem;
@@ -26,9 +27,17 @@ public class FridgeManagerService {
         return fridgeManagerWebclient.getOpenFoodFactsItem(barcode);
     }
 
+    public Item fetchItemByBarcode(String barcode){
+        if(fridgeManagerRepo.findByBarcode(barcode) != null){
+            return fridgeManagerRepo.findByBarcode(barcode);
+        }
+        throw new ProductNotFoundException(barcode);
+    }
+
     public Item createItem(ItemToCreate itemToCreate) {
         Item newItem = new Item(
                 uuIdService.createId(),
+                itemToCreate.barcode(),
                 itemToCreate.name(),
                 itemToCreate.imageUrl(),
                 itemToCreate.storageLocation(),
@@ -39,4 +48,5 @@ public class FridgeManagerService {
         );
         return fridgeManagerRepo.insert(newItem);
     }
+
 }

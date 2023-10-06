@@ -1,5 +1,6 @@
 package com.bssoftwaredevelopment.backend;
 
+import com.bssoftwaredevelopment.backend.customexceptions.ProductNotFoundException;
 import com.bssoftwaredevelopment.backend.models.*;
 import com.bssoftwaredevelopment.backend.services.UuIdService;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ class FridgeManagerServiceTest {
     FridgeManagerService fridgeManagerService = new FridgeManagerService(fridgeManagerRepo, uuIdService, fridgeManagerWebclient);
 
     private final ItemToCreate itemToCreate = new ItemToCreate(
+            "737628064502",
             "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
             "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
             StorageLocation.FRIDGE,
@@ -46,20 +48,52 @@ class FridgeManagerServiceTest {
     }
 
     @Test
+    void returnItem_whenFetchItemByBarcode() {
+        //Given
+        String barcode = "737628064502";
+        Item expectedItem = new Item(
+                "0123",
+                "737628064502",
+                "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
+                "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
+                StorageLocation.FRIDGE,
+                1,
+                1,
+                StockUnit.PIECE,
+                "155 g"
+        );
+
+        //When
+        when(fridgeManagerRepo.findByBarcode(barcode))
+                .thenReturn(expectedItem);
+        Item actualItem = fridgeManagerService.fetchItemByBarcode(barcode);
+
+        //Then
+        assertEquals(expectedItem, actualItem);
+    }
+
+    @Test
+    void return_Exceptions_whenBarcodeIsNull() {
+        //Then
+        assertThrows(ProductNotFoundException.class, () -> fridgeManagerService.fetchItemByBarcode(null));
+    }
+
+    @Test
     void returnItem_whenCreateItem() {
         //Given
-       Item expectedItem = new Item(
-               "0123",
-               "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
-               "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
-               StorageLocation.FRIDGE,
-               1,
-               1,
-               StockUnit.PIECE,
-               "155 g"
-       );
+        Item expectedItem = new Item(
+                "0123",
+                "737628064502",
+                "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
+                "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
+                StorageLocation.FRIDGE,
+                1,
+                1,
+                StockUnit.PIECE,
+                "155 g"
+        );
 
-       //When
+        //When
         when(uuIdService.createId())
                 .thenReturn("0123");
         when(fridgeManagerRepo.insert(expectedItem))

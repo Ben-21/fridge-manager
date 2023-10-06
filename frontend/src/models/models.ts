@@ -1,5 +1,6 @@
 export type Item = {
     id: string,
+    barcode: string,
     name: string,
     imageUrl: string,
     storageLocation: StorageLocation,
@@ -10,6 +11,7 @@ export type Item = {
 }
 
 export type ItemToCreate = {
+    barcode: string,
     name: string,
     imageUrl: string,
     storageLocation: StorageLocation,
@@ -32,14 +34,14 @@ export type OpenFoodFactsProduct = {
 }
 
 export enum StorageLocation {
-    FRIDGE = "Fridge",
-    PANTRY = "Pantry"
+    FRIDGE = "FRIDGE",
+    PANTRY = "PANTRY"
 }
 
 export enum StockUnit {
-    PIECE = "Piece",
-    PACKAGING = "Packaging Unit",
-    GRAM = "Gram",
-    MILLILITER = "Milliliter"
+    PIECE = "PIECE",
+    PACKAGING = "PACKAGING",
+    GRAM = "GRAM",
+    MILLILITER = "MILLILITER"
 }
 

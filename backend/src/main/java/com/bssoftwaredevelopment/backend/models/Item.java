@@ -7,12 +7,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public record Item(
         @Id
         String id,
+        String barcode,
         String name,
         String imageUrl,
         StorageLocation storageLocation,
         int stockAmount,
         int warnStockAmount,
-        StockUnit StockUnit,
+        StockUnit stockUnit,
         String quantity
 ) {
 }
