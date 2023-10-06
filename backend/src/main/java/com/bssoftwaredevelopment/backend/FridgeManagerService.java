@@ -48,4 +48,5 @@ public class FridgeManagerService {
         );
         return fridgeManagerRepo.insert(newItem);
     }
+
 }

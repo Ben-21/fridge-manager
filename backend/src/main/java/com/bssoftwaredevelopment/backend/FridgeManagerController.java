@@ -1,12 +1,10 @@
 package com.bssoftwaredevelopment.backend;
 
 import com.bssoftwaredevelopment.backend.models.Item;
+import com.bssoftwaredevelopment.backend.models.ItemToCreate;
 import com.bssoftwaredevelopment.backend.models.OpenFoodFactsItem;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,4 +23,10 @@ public class FridgeManagerController {
     public Item fetchItemByBarcode(@PathVariable String barcode){
         return fridgeManagerService.fetchItemByBarcode(barcode);
     }
+
+    @PostMapping
+    public Item createItem(@RequestBody ItemToCreate itemToCreate){
+        return fridgeManagerService.createItem(itemToCreate);
+    }
+
 }
