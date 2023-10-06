@@ -28,7 +28,7 @@ public class FridgeManagerService {
     }
 
     public Item fetchItemByBarcode(String barcode){
-        if(barcode.equals("") || fridgeManagerRepo.findByBarcode(barcode) != null){
+        if(fridgeManagerRepo.findByBarcode(barcode) != null){
             return fridgeManagerRepo.findByBarcode(barcode);
         }
         throw new ProductNotFoundException(barcode);

@@ -1,5 +1,6 @@
 package com.bssoftwaredevelopment.backend;
 
+import com.bssoftwaredevelopment.backend.customexceptions.ProductNotFoundException;
 import com.bssoftwaredevelopment.backend.models.*;
 import com.bssoftwaredevelopment.backend.services.UuIdService;
 import org.junit.jupiter.api.Test;
@@ -69,6 +70,12 @@ class FridgeManagerServiceTest {
 
         //Then
         assertEquals(expectedItem, actualItem);
+    }
+
+    @Test
+    void return_Exceptions_whenBarcodeIsNull() {
+        //Then
+        assertThrows(ProductNotFoundException.class, () -> fridgeManagerService.fetchItemByBarcode(null));
     }
 
     @Test
