@@ -3,8 +3,8 @@ package com.bssoftwaredevelopment.backend.models;
 
 
 public record ItemToCreate(
-        String name,
         String barcode,
+        String name,
         String imageUrl,
         StorageLocation storageLocation,
         int stockAmount,

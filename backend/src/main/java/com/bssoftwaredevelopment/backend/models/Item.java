@@ -13,7 +13,7 @@ public record Item(
         StorageLocation storageLocation,
         int stockAmount,
         int warnStockAmount,
-        StockUnit StockUnit,
+        StockUnit stockUnit,
         String quantity
 ) {
 }
