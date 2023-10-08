@@ -5,6 +5,8 @@ import com.bssoftwaredevelopment.backend.models.*;
 import com.bssoftwaredevelopment.backend.services.UuIdService;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -104,30 +106,27 @@ class FridgeManagerServiceTest {
         assertEquals(expectedItem, actualItem);
     }
 
-//    @Test
-//    void returnUpdatedItem_whenUpdateItem() {
-//        //Given
-//        Item updatedItem = new Item(
-//                "0123",
-//                "737628064502",
-//                "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
-//                "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
-//                StorageLocation.FRIDGE,
-//                1,
-//                1,
-//                StockUnit.PIECE,
-//                "155 g"
-//        );
-//
-//        //When
-//        when(fridgeManagerRepo.save(updatedItem))
-//                .thenReturn(updatedItem);
-//        when(fridgeManagerRepo.existsById("0123"))
-//                .thenReturn(true);
-//        Item actualItem = fridgeManagerService.updateItem(updatedItem);
-//
-//        //Then
-//        verify(fridgeManagerRepo).save(updatedItem);
-//        assertEquals(updatedItem, actualItem);
-//    }
+    @Test
+    void returnAllItems_whenGetAllItems(){
+        //Given
+        Item expectedItem = new Item(
+                "0123",
+                "737628064502",
+                "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
+                "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
+                StorageLocation.FRIDGE,
+                1,
+                1,
+                StockUnit.PIECE,
+                "155 g"
+        );
+
+        //When
+        when(fridgeManagerRepo.findAll())
+                .thenReturn(List.of(expectedItem));
+        List<Item> actualItems = fridgeManagerService.getAllItems();
+
+        //Then
+        assertEquals(List.of(expectedItem), actualItems);
+    }
 }

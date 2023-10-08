@@ -6,12 +6,13 @@ import ItemCard from "./components/ItemCard.tsx";
 import FetchItem from "./components/FetchItem.tsx";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import ListItems from "./components/ListItems.tsx";
 
 function App() {
 
     const [barcode, setBarcode] = useState<string>("");
     const [item, setItem] = useState<Item>();
-    const [items, setItems] = useState<Item[]>();
+    const [items, setItems] = useState<Item[]>([]);
 
 
     useEffect(()=>{
@@ -43,7 +44,7 @@ function App() {
             <input name={"barcode"} type={"text"} value={barcode} onChange={(event) => setBarcode(event.target.value)}/>
             <FetchItem fetchData={fetchItem} barcode={barcode}/>
             {item && <ItemCard item={item}/>}
-
+            <ListItems items={items}/>
         </>
     )
 }

@@ -7,6 +7,8 @@ import com.bssoftwaredevelopment.backend.models.OpenFoodFactsItem;
 import com.bssoftwaredevelopment.backend.services.UuIdService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class FridgeManagerService {
@@ -47,5 +49,9 @@ public class FridgeManagerService {
                 itemToCreate.quantity()
         );
         return fridgeManagerRepo.insert(newItem);
+    }
+
+    public List<Item> getAllItems() {
+        return fridgeManagerRepo.findAll();
     }
 }
