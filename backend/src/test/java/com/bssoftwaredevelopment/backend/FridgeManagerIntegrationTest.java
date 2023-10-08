@@ -86,4 +86,46 @@ class FridgeManagerIntegrationTest {
                 .andExpect(jsonPath("stockUnit").value("PIECE"))
                 .andExpect(jsonPath("quantity").value("155 g"));
     }
+
+    @Test
+    void returnAllItems_whenGetAllItems() throws Exception {
+        //Given
+        ItemToCreate itemToCreate = new ItemToCreate(
+                "737628064502",
+                "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
+                "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
+                StorageLocation.FRIDGE,
+                1,
+                1,
+                StockUnit.PIECE,
+                "155 g"
+        );
+
+        String itemToCreateJson = objectMapper.writeValueAsString(itemToCreate);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/items")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(itemToCreateJson)
+        );
+
+
+        //When
+        mockMvc.perform(
+                        MockMvcRequestBuilders.get("/api/items")
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                //Then
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].id").isNotEmpty())
+                .andExpect(jsonPath("$[0].barcode").value("737628064502"))
+                .andExpect(jsonPath("$[0].name").value("Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning"))
+                .andExpect(jsonPath("$[0].imageUrl").value("https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg"))
+                .andExpect(jsonPath("$[0].storageLocation").value("FRIDGE"))
+                .andExpect(jsonPath("$[0].stockAmount").value(1))
+                .andExpect(jsonPath("$[0].warnStockAmount").value(1))
+                .andExpect(jsonPath("$[0].stockUnit").value("PIECE"))
+                .andExpect(jsonPath("$[0].quantity").value("155 g"));
+    }
 }
