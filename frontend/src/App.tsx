@@ -1,7 +1,7 @@
 import './App.css'
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import {Item, StockUnit, StorageLocation} from "./models/models.ts";
+import {Item} from "./models/models.ts";
 import ItemCard from "./components/ItemCard.tsx";
 import FetchItem from "./components/FetchItem.tsx";
 import {useEffect, useState} from "react";
