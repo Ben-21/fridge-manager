@@ -29,8 +29,5 @@ public class FridgeManagerController {
         return fridgeManagerService.createItem(itemToCreate);
     }
 
-    @PutMapping
-    public Item updateItem(@RequestBody Item item){
-        return fridgeManagerService.updateItem(item);
-    }
+
 }
