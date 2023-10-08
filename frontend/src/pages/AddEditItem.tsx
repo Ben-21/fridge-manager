@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import FetchOpenFoodFactsItem from "../components/FetchOpenFoodFactsItem.tsx";
-import {Item, OpenFoodFactsItem} from "../models/models.ts";
+import {Item, ItemToCreate, OpenFoodFactsItem} from "../models/models.ts";
 import FetchItem from "../components/FetchItem.tsx";
 import axios from "axios";
 import {toast} from "react-toastify";
@@ -8,7 +8,7 @@ import {toast} from "react-toastify";
 
 export default function AddEditItem() {
     const [openFoodFactsItem, setOpenFoodFactsItem] = useState<OpenFoodFactsItem>();
-    const [itemToSave, setItemToSave] = useState<Item>();
+    const [itemToSave, setItemToSave] = useState<ItemToCreate>();
     const [barcode, setBarcode] = useState<string>("");
     const fetchOpenFoodFactsData = (childData: OpenFoodFactsItem) => {
         setOpenFoodFactsItem(childData)
@@ -19,17 +19,20 @@ export default function AddEditItem() {
 
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+        const newItem = {...itemToSave as ItemToCreate};
+        newItem.barcode = barcode;
+        setItemToSave(newItem);
         const {name, value} = event.target;
         setItemToSave((prevItem) => ({
-            ...(prevItem as Item),
+            ...(prevItem as ItemToCreate),
             [name]: value,
         }));
     }
 
 
-    function adoptDataToItemToSave(newFields: Partial<Item>) {
+    function adoptDataToItemToSave(newFields: Partial<ItemToCreate>) {
         setItemToSave((prevITem) => ({
-            ...(prevITem as Item),
+            ...(prevITem as ItemToCreate),
             ...newFields,
         }));
     }
@@ -41,7 +44,7 @@ export default function AddEditItem() {
 
     function saveItemToDatabase() {
         axios
-            .post("/api/items/", itemToSave)
+            .post("/api/items", itemToSave)
             .then(() => toast.success("Product successfully added"))
             .catch((error) => {
                 toast.error("Something went wrong" + error);

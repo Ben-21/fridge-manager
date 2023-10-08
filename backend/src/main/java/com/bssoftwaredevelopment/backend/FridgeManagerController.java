@@ -15,18 +15,19 @@ public class FridgeManagerController {
 
 
     @GetMapping("/openfoodapi/{barcode}")
-    public OpenFoodFactsItem fetchOpenFoodFactsItem(@PathVariable String barcode){
+    public OpenFoodFactsItem fetchOpenFoodFactsItem(@PathVariable String barcode) {
         return fridgeManagerService.fetchOpenFoodFactsItem(barcode);
     }
 
     @GetMapping("/{barcode}")
-    public Item fetchItemByBarcode(@PathVariable String barcode){
+    public Item fetchItemByBarcode(@PathVariable String barcode) {
         return fridgeManagerService.fetchItemByBarcode(barcode);
     }
 
     @PostMapping
-    public Item createItem(@RequestBody ItemToCreate itemToCreate){
+    public Item createItem(@RequestBody ItemToCreate itemToCreate) {
         return fridgeManagerService.createItem(itemToCreate);
     }
+
 
 }
