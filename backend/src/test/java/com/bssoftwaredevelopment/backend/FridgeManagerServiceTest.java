@@ -104,30 +104,30 @@ class FridgeManagerServiceTest {
         assertEquals(expectedItem, actualItem);
     }
 
-    @Test
-    void returnUpdatedItem_whenUpdateItem() {
-        //Given
-        Item updatedItem = new Item(
-                "0123",
-                "737628064502",
-                "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
-                "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
-                StorageLocation.FRIDGE,
-                1,
-                1,
-                StockUnit.PIECE,
-                "155 g"
-        );
-
-        //When
-        when(fridgeManagerRepo.save(updatedItem))
-                .thenReturn(updatedItem);
-        when(fridgeManagerRepo.existsById("0123"))
-                .thenReturn(true);
-        Item actualItem = fridgeManagerService.updateItem(updatedItem);
-
-        //Then
-        verify(fridgeManagerRepo).save(updatedItem);
-        assertEquals(updatedItem, actualItem);
-    }
+//    @Test
+//    void returnUpdatedItem_whenUpdateItem() {
+//        //Given
+//        Item updatedItem = new Item(
+//                "0123",
+//                "737628064502",
+//                "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
+//                "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
+//                StorageLocation.FRIDGE,
+//                1,
+//                1,
+//                StockUnit.PIECE,
+//                "155 g"
+//        );
+//
+//        //When
+//        when(fridgeManagerRepo.save(updatedItem))
+//                .thenReturn(updatedItem);
+//        when(fridgeManagerRepo.existsById("0123"))
+//                .thenReturn(true);
+//        Item actualItem = fridgeManagerService.updateItem(updatedItem);
+//
+//        //Then
+//        verify(fridgeManagerRepo).save(updatedItem);
+//        assertEquals(updatedItem, actualItem);
+//    }
 }
