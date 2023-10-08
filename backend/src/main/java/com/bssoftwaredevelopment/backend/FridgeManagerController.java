@@ -6,6 +6,8 @@ import com.bssoftwaredevelopment.backend.models.OpenFoodFactsItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/items")
@@ -13,6 +15,10 @@ public class FridgeManagerController {
 
     private final FridgeManagerService fridgeManagerService;
 
+    @GetMapping
+    public List<Item> getAllItems() {
+        return fridgeManagerService.getAllItems();
+    }
 
     @GetMapping("/openfoodapi/{barcode}")
     public OpenFoodFactsItem fetchOpenFoodFactsItem(@PathVariable String barcode) {
