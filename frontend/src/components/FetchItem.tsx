@@ -26,9 +26,10 @@ export default function FetchItem(props: Props) {
                     toast.success("Found Product")
                 })
                 .catch((error) => {
-                    toast.error("No Product found");
+                    toast.error("Product not found");
                     console.log(error);
                 })
+                .finally(() => setBarcode(""));
         }
     }
 

@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import {Item} from "../models/models.ts";
 import axios from "axios";
 import {toast} from "react-toastify";
+import styled from "@emotion/styled";
 
 export default function Home() {
     const navigate = useNavigate();
@@ -37,12 +38,29 @@ export default function Home() {
         navigate(`/add`);
     }
 
+    function clearFoundItem() {
+        setItem(undefined);
+        fetchAllItems();
+    }
+
     return (
         <>
             <FetchItem fetchData={fetchItem}/>
             <button type={"button"} onClick={goToItemPage}>Add New Item</button>
-            {item && <ItemCard item={item}/>}
+            {item &&
+                <ItemCardContainer>
+                    <legend>Product Details</legend>
+                    <button type={"button"} onClick={clearFoundItem}>Clear</button>
+                <ItemCard item={item}/>
+                </ItemCardContainer>}
             <ListItems items={items}/>
         </>
     )
 }
+
+const ItemCardContainer = styled.fieldset`
+  border: 5px solid #ccc; /* Add your desired border style */
+  border-radius: 5px;
+  margin: 10px; /* Add margin for spacing */
+  padding: 10px; /* Add padding as needed */
+`;
