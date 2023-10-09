@@ -9,7 +9,6 @@ import {toast} from "react-toastify";
 
 export default function Home() {
     const navigate = useNavigate();
-    const [barcode, setBarcode] = useState<string>("");
     const [item, setItem] = useState<Item>();
     const [items, setItems] = useState<Item[]>([]);
 
@@ -40,8 +39,7 @@ export default function Home() {
 
     return (
         <>
-            <input name={"barcode"} type={"text"} value={barcode} onChange={(event) => setBarcode(event.target.value)}/>
-            <FetchItem fetchData={fetchItem} barcode={barcode}/>
+            <FetchItem fetchData={fetchItem}/>
             <button type={"button"} onClick={goToItemPage}>Add New Item</button>
             {item && <ItemCard item={item}/>}
             <ListItems items={items}/>
