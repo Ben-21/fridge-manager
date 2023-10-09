@@ -25,7 +25,6 @@ public class FridgeManagerService {
     }
 
     public OpenFoodFactsItem fetchOpenFoodFactsItem(String barcode) {
-
         return fridgeManagerWebclient.getOpenFoodFactsItem(barcode);
     }
 
