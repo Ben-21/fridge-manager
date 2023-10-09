@@ -1,16 +1,20 @@
 import axios from "axios";
 import {Item} from "../models/models.ts";
 import {toast} from "react-toastify";
+import React, {useState} from "react";
 
 
 type Props = {
     fetchData: (childData: Item) => void;
-    barcode: string;
 }
 
 export default function FetchItem(props: Props) {
 
-    function fetchItem(barcode: string) {
+    const [barcode, setBarcode] = useState<string>("");
+
+
+    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
         if (barcode === "") {
             toast.error("Please enter a barcode");
         } else {
@@ -30,8 +34,10 @@ export default function FetchItem(props: Props) {
 
 
     return (
-        <form id="barcodeForm">
-            <button type={"button"} onClick={() => fetchItem(props.barcode)}>Search Database</button>
+        <form id="barcodeForm" onSubmit={handleSubmit}>
+            <input name={"barcode"} type={"text"} value={barcode} onChange={(event) => setBarcode(event.target.value)}/>
+            <br/>
+            <button type={"submit"}>Search Database</button>
         </form>
     )
 }
