@@ -51,8 +51,9 @@ export default function UpdateItem() {
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
+        const {id, ...itemToCreate} = itemToSave;
         axios
-            .put("/api/items", itemToSave)
+            .put(`/api/items/${id}`, itemToCreate)
             .then(() => toast.success("Product successfully updated"))
             .catch((error) => {
                 toast.error("Something went wrong" + error);
@@ -66,6 +67,11 @@ export default function UpdateItem() {
         <Container>
             <HomeButton/>
             <Form onSubmit={handleSubmit}>
+                <FormGroup>
+                    <label htmlFor={"imageUrl"}>Product Image</label>
+                    <br/>
+                    <img src={itemToSave.imageUrl} alt={"Product Image"}/>
+                </FormGroup>
                 <FormGroup>
                     <label htmlFor="barcode">Product Barcode:</label>
                     <input name="barcode" type="text" value={itemToSave.barcode} onChange={handleChange} required/>
