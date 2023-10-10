@@ -126,7 +126,6 @@ class FridgeManagerServiceTest {
         assertEquals("Empty item can not be saved", exception.getMessage());
     }
 
-
     @Test
     void returnAllItems_whenGetAllItems(){
         //Given
@@ -149,5 +148,46 @@ class FridgeManagerServiceTest {
 
         //Then
         assertEquals(List.of(expectedItem), actualItems);
+    }
+
+    @Test
+    void returnItem_whenUpdateItem(){
+        //Given
+        String id = "0123";
+        Item itemToUpdate = new Item(
+                "0123",
+                "737628064502",
+                "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
+                "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
+                StorageLocation.FRIDGE,
+                1,
+                1,
+                StockUnit.PIECE,
+                "155 g"
+        );
+
+        ItemToCreate itemToCreate = new ItemToCreate(
+                "737628064502",
+                "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
+                "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
+                StorageLocation.FRIDGE,
+                1,
+                1,
+                StockUnit.PIECE,
+                "155 g"
+        );
+
+        //When
+        when(fridgeManagerRepo.existsById(id))
+                .thenReturn(true);
+        when(fridgeManagerRepo.save(itemToUpdate))
+                .thenReturn(itemToUpdate);
+
+        Item actualItem = fridgeManagerService.updateItem(id, itemToCreate);
+
+        //Then
+        verify(fridgeManagerRepo).existsById(id);
+        verify(fridgeManagerRepo).save(itemToUpdate);
+        assertEquals(itemToUpdate, actualItem);
     }
 }
