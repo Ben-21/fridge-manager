@@ -1,9 +1,8 @@
 package com.bssoftwaredevelopment.backend;
 
+import com.bssoftwaredevelopment.backend.customexceptions.EmptyItemException;
 import com.bssoftwaredevelopment.backend.customexceptions.ItemByBarcodeNotFoundException;
-import com.bssoftwaredevelopment.backend.models.Item;
-import com.bssoftwaredevelopment.backend.models.ItemToCreate;
-import com.bssoftwaredevelopment.backend.models.OpenFoodFactsItem;
+import com.bssoftwaredevelopment.backend.models.*;
 import com.bssoftwaredevelopment.backend.services.UuIdService;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +35,9 @@ public class FridgeManagerService {
     }
 
     public Item createItem(ItemToCreate itemToCreate) {
+        if(isItemEmpty(itemToCreate)){
+            throw new EmptyItemException();
+        }
         Item newItem = new Item(
                 uuIdService.createId(),
                 itemToCreate.barcode(),
@@ -48,6 +50,13 @@ public class FridgeManagerService {
                 itemToCreate.quantity()
         );
         return fridgeManagerRepo.insert(newItem);
+
+    }
+    private boolean isItemEmpty(ItemToCreate itemToCreate) {
+        return itemToCreate.barcode().isEmpty() ||
+                itemToCreate.name().isEmpty() ||
+                itemToCreate.imageUrl().isEmpty() ||
+                itemToCreate.quantity().isEmpty();
     }
 
     public List<Item> getAllItems() {

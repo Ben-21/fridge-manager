@@ -15,8 +15,8 @@ export default function AddEditItem() {
         imageUrl: '',
         quantity: '',
         storageLocation: StorageLocation.FRIDGE,
-        stockAmount: 0,
-        warnStockAmount: 0,
+        stockAmount: 1,
+        warnStockAmount: 1,
         stockUnit: StockUnit.PIECE
     }
     const [itemToSave, setItemToSave] = useState<ItemToCreate>(emptyItem);
@@ -47,7 +47,8 @@ export default function AddEditItem() {
         setItemToSave(emptyItem);
     }
 
-    function saveItemToDatabase() {
+    function saveItemToDatabase(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
         axios
             .post("/api/items", itemToSave)
             .then(() => toast.success("Product successfully added"))
@@ -61,8 +62,8 @@ export default function AddEditItem() {
                 imageUrl: '',
                 quantity: '',
                 storageLocation: StorageLocation.FRIDGE,
-                stockAmount: 0,
-                warnStockAmount: 0,
+                stockAmount: 1,
+                warnStockAmount: 1,
                 stockUnit: StockUnit.PIECE
             }));
     }
@@ -104,18 +105,19 @@ export default function AddEditItem() {
                     </div>
                 )}
                 <hr/>
-                <Form>
+                <Form onSubmit={saveItemToDatabase}>
                     <FormGroup>
                         <label htmlFor="barcode">Product Barcode:</label>
-                        <input name="barcode" type="text" value={itemToSave?.barcode} onChange={handleChange}/>
+                        <input name="barcode" type="text" value={itemToSave?.barcode} onChange={handleChange} required/>
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="name">Product Name:</label>
-                        <input name="name" type="text" value={itemToSave?.name} onChange={handleChange}/>
+                        <input name="name" type="text" value={itemToSave?.name} onChange={handleChange} required/>
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="quantity">Product Quantity:</label>
-                        <input name="quantity" type="text" value={itemToSave?.quantity} onChange={handleChange}/>
+                        <input name="quantity" type="text" value={itemToSave?.quantity} onChange={handleChange}
+                               required/>
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="storageLocation">Storage Location:</label>
@@ -128,12 +130,12 @@ export default function AddEditItem() {
                     <FormGroup>
                         <label htmlFor="stockAmount">Stock Amount:</label>
                         <input name="stockAmount" type="number" value={itemToSave?.stockAmount}
-                               onChange={handleChange}/>
+                               onChange={handleChange} required/>
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="warnStockAmount">Warn Stock Amount:</label>
                         <input name="warnStockAmount" type="number" value={itemToSave?.warnStockAmount}
-                               onChange={handleChange}/>
+                               onChange={handleChange} required/>
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="stockUnit">Stock Unit:</label>
@@ -145,7 +147,7 @@ export default function AddEditItem() {
                             <option value="MILLILITER">Milliliter</option>
                         </select>
                     </FormGroup>
-                    <button type="button" onClick={saveItemToDatabase}>
+                    <button type="submit">
                         Save Product to Database
                     </button>
                 </Form>
