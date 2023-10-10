@@ -56,10 +56,6 @@ public class FridgeManagerService {
         return itemToCreate.barcode().isEmpty() ||
                 itemToCreate.name().isEmpty() ||
                 itemToCreate.imageUrl().isEmpty() ||
-                itemToCreate.storageLocation() == StorageLocation.FRIDGE ||
-                itemToCreate.stockAmount() == 1 ||
-                itemToCreate.warnStockAmount() == 1 ||
-                itemToCreate.stockUnit() == StockUnit.PIECE ||
                 itemToCreate.quantity().isEmpty();
     }
 
