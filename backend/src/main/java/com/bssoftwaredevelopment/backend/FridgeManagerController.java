@@ -20,12 +20,17 @@ public class FridgeManagerController {
         return fridgeManagerService.getAllItems();
     }
 
+    @GetMapping("/id/{id}")
+    public Item fetchItemById (@PathVariable String id){
+    return fridgeManagerService.fetchItemById(id);
+    }
+
     @GetMapping("/openfoodapi/{barcode}")
     public OpenFoodFactsItem fetchOpenFoodFactsItem(@PathVariable String barcode) {
         return fridgeManagerService.fetchOpenFoodFactsItem(barcode);
     }
 
-    @GetMapping("/{barcode}")
+    @GetMapping("/barcode/{barcode}")
     public Item fetchItemByBarcode(@PathVariable String barcode) {
         return fridgeManagerService.fetchItemByBarcode(barcode);
     }
