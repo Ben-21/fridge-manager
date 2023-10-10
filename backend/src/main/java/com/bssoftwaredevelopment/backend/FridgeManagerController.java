@@ -40,5 +40,10 @@ public class FridgeManagerController {
         return fridgeManagerService.createItem(itemToCreate);
     }
 
+    @PutMapping("/{id}")
+    public Item updateItem(@PathVariable String id, @RequestBody ItemToCreate itemToCreate){
+        return fridgeManagerService.updateItem(id, itemToCreate);
+    }
+
 
 }
