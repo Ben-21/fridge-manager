@@ -35,7 +35,7 @@ public class FridgeManagerService {
     }
 
     public Item createItem(ItemToCreate itemToCreate) {
-        if(itemToCreate.barcode().isEmpty() && itemToCreate.name().isEmpty() && itemToCreate.imageUrl().isEmpty() && itemToCreate.storageLocation() == StorageLocation.FRIDGE && itemToCreate.stockAmount() == 1 && itemToCreate.warnStockAmount() == 1 && itemToCreate.stockUnit() == StockUnit.PIECE && itemToCreate.quantity().isEmpty()){
+        if(isItemEmpty(itemToCreate)){
             throw new EmptyItemException();
         }
         Item newItem = new Item(
@@ -50,6 +50,17 @@ public class FridgeManagerService {
                 itemToCreate.quantity()
         );
         return fridgeManagerRepo.insert(newItem);
+
+    }
+    private boolean isItemEmpty(ItemToCreate itemToCreate) {
+        return itemToCreate.barcode().isEmpty() ||
+                itemToCreate.name().isEmpty() ||
+                itemToCreate.imageUrl().isEmpty() ||
+                itemToCreate.storageLocation() == StorageLocation.FRIDGE ||
+                itemToCreate.stockAmount() == 1 ||
+                itemToCreate.warnStockAmount() == 1 ||
+                itemToCreate.stockUnit() == StockUnit.PIECE ||
+                itemToCreate.quantity().isEmpty();
     }
 
     public List<Item> getAllItems() {
