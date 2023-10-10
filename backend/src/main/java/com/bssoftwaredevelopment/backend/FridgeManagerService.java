@@ -2,6 +2,7 @@ package com.bssoftwaredevelopment.backend;
 
 import com.bssoftwaredevelopment.backend.customexceptions.EmptyItemException;
 import com.bssoftwaredevelopment.backend.customexceptions.ItemByBarcodeNotFoundException;
+import com.bssoftwaredevelopment.backend.customexceptions.ItemByIdNotFoundException;
 import com.bssoftwaredevelopment.backend.models.*;
 import com.bssoftwaredevelopment.backend.services.UuIdService;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,13 @@ public class FridgeManagerService {
         throw new ItemByBarcodeNotFoundException(barcode);
     }
 
+    public Item fetchItemById(String id){
+        if(fridgeManagerRepo.existsById(id)){
+            return fridgeManagerRepo.findById(id).orElseThrow(() -> new ItemByIdNotFoundException(id));
+        }
+        throw new ItemByIdNotFoundException(id);
+    }
+
     public Item createItem(ItemToCreate itemToCreate) {
         if(isItemEmpty(itemToCreate)){
             throw new EmptyItemException();
@@ -61,5 +69,23 @@ public class FridgeManagerService {
 
     public List<Item> getAllItems() {
         return fridgeManagerRepo.findAll();
+    }
+
+    public Item updateItem (String id, ItemToCreate itemToCreate){
+        if(fridgeManagerRepo.existsById(id)){
+            Item itemToSave = new Item(
+                    id,
+                    itemToCreate.barcode(),
+                    itemToCreate.name(),
+                    itemToCreate.imageUrl(),
+                    itemToCreate.storageLocation(),
+                    itemToCreate.stockAmount(),
+                    itemToCreate.warnStockAmount(),
+                    itemToCreate.stockUnit(),
+                    itemToCreate.quantity()
+            );
+            return fridgeManagerRepo.save(itemToSave);
+        }
+        throw new ItemByIdNotFoundException(id);
     }
 }

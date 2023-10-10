@@ -1,13 +1,16 @@
 import {Item} from "../models/models.ts";
 import styled from "@emotion/styled";
+import {useNavigate} from "react-router-dom";
 
 
 type Props = {
     item: Item
 }
 export default function ItemCard(props: Props) {
+    const navigate = useNavigate();
+
     return (
-        <Container>
+        <Container onClick={() => navigate(`/update/${props.item.id}`) }>
             <Fieldset>
                 <legend>Product Details</legend>
                 <div className="image-container">

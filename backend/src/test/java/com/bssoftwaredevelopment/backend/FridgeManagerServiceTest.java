@@ -2,11 +2,13 @@ package com.bssoftwaredevelopment.backend;
 
 import com.bssoftwaredevelopment.backend.customexceptions.EmptyItemException;
 import com.bssoftwaredevelopment.backend.customexceptions.ItemByBarcodeNotFoundException;
+import com.bssoftwaredevelopment.backend.customexceptions.ItemByIdNotFoundException;
 import com.bssoftwaredevelopment.backend.models.*;
 import com.bssoftwaredevelopment.backend.services.UuIdService;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -76,6 +78,56 @@ class FridgeManagerServiceTest {
     }
 
     @Test
+    void returnItem_whenFetchItemById() {
+        //Given
+        String id = "0123";
+        Item item = new Item(
+                "0123",
+                "737628064502",
+                "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
+                "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
+                StorageLocation.FRIDGE,
+                1,
+                1,
+                StockUnit.PIECE,
+                "155 g"
+        );
+
+        //When
+        when(fridgeManagerRepo.existsById(id))
+                .thenReturn(true);
+        when(fridgeManagerRepo.findById(id))
+                .thenReturn(Optional.of(item));
+
+        Item actualItem = fridgeManagerService.fetchItemById(id);
+
+        //Then
+        verify(fridgeManagerRepo).existsById(id);
+        verify(fridgeManagerRepo).findById(id);
+        assertEquals(item, actualItem);
+    }
+
+    @Test
+    void throwException_whenItemByIdNotExists(){
+        //When
+        when(fridgeManagerRepo.existsById("0000"))
+                .thenReturn(false);
+        //Then
+        assertThrows(ItemByIdNotFoundException.class, () -> fridgeManagerService.fetchItemById("0000"));
+        verify(fridgeManagerRepo).existsById("0000");
+    }
+
+    @Test
+    void throwException_whenItemByIdNotFound(){
+        //When
+        when(fridgeManagerRepo.existsById("0000"))
+                .thenReturn(true);
+        //Then
+        assertThrows(ItemByIdNotFoundException.class, () -> fridgeManagerService.fetchItemById("0000"));
+        verify(fridgeManagerRepo).existsById("0000");
+    }
+
+    @Test
     void return_Exceptions_whenBarcodeIsNull() {
         //Then
         assertThrows(ItemByBarcodeNotFoundException.class, () -> fridgeManagerService.fetchItemByBarcode(null));
@@ -126,9 +178,8 @@ class FridgeManagerServiceTest {
         assertEquals("Empty item can not be saved", exception.getMessage());
     }
 
-
     @Test
-    void returnAllItems_whenGetAllItems(){
+    void returnAllItems_whenGetAllItems() {
         //Given
         Item expectedItem = new Item(
                 "0123",
@@ -149,5 +200,46 @@ class FridgeManagerServiceTest {
 
         //Then
         assertEquals(List.of(expectedItem), actualItems);
+    }
+
+    @Test
+    void returnItem_whenUpdateItem() {
+        //Given
+        String id = "0123";
+        Item itemToUpdate = new Item(
+                "0123",
+                "737628064502",
+                "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
+                "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
+                StorageLocation.FRIDGE,
+                1,
+                1,
+                StockUnit.PIECE,
+                "155 g"
+        );
+
+        ItemToCreate itemToCreate = new ItemToCreate(
+                "737628064502",
+                "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
+                "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
+                StorageLocation.FRIDGE,
+                1,
+                1,
+                StockUnit.PIECE,
+                "155 g"
+        );
+
+        //When
+        when(fridgeManagerRepo.existsById(id))
+                .thenReturn(true);
+        when(fridgeManagerRepo.save(itemToUpdate))
+                .thenReturn(itemToUpdate);
+
+        Item actualItem = fridgeManagerService.updateItem(id, itemToCreate);
+
+        //Then
+        verify(fridgeManagerRepo).existsById(id);
+        verify(fridgeManagerRepo).save(itemToUpdate);
+        assertEquals(itemToUpdate, actualItem);
     }
 }

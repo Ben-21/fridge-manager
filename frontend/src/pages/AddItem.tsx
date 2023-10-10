@@ -7,7 +7,7 @@ import styled from "@emotion/styled";
 import HomeButton from "../components/HomeButton.tsx";
 
 
-export default function AddEditItem() {
+export default function AddItem() {
     const [openFoodFactsItem, setOpenFoodFactsItem] = useState<OpenFoodFactsItem>();
     const emptyItem: ItemToCreate = {
         barcode: '',

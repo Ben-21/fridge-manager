@@ -19,7 +19,7 @@ export default function FetchItem(props: Props) {
             toast.error("Please enter a barcode");
         } else {
             axios
-                .get("/api/items/" + barcode)
+                .get("/api/items/barcode/" + barcode)
                 .then((response) => response.data)
                 .then((data) => {
                     props.fetchData(data);
