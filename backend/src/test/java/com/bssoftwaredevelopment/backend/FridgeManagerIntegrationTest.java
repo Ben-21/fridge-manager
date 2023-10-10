@@ -71,7 +71,7 @@ class FridgeManagerIntegrationTest {
 
         //When
         mockMvc.perform(
-                        MockMvcRequestBuilders.get("/api/items/" + barcode)
+                        MockMvcRequestBuilders.get("/api/items/barcode/" + barcode)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 //Then
