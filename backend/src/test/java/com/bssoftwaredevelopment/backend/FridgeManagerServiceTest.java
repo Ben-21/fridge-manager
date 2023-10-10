@@ -108,8 +108,8 @@ class FridgeManagerServiceTest {
     }
 
     @Test
-    void throwExceptionIfItemIsEmpty(){
-        //Given
+    void throwExceptionIfItemIsEmptyWithMessageCheck() {
+        // Given
         ItemToCreate emptyItem = new ItemToCreate(
                 "",
                 "",
@@ -121,14 +121,14 @@ class FridgeManagerServiceTest {
                 ""
         );
 
-        //When
-        try {
-        fridgeManagerService.createItem(emptyItem);
-        } catch (EmptyItemException e) {
-        //Then
-        assertEquals("Empty item can not be saved", e.getMessage());
-        }
+        // When and Then
+        EmptyItemException exception = assertThrows(EmptyItemException.class, () -> {
+            fridgeManagerService.createItem(emptyItem);
+        });
+
+        assertEquals("Empty item can not be saved", exception.getMessage());
     }
+
 
     @Test
     void returnAllItems_whenGetAllItems(){
