@@ -1,5 +1,6 @@
 package com.bssoftwaredevelopment.backend;
 
+import com.bssoftwaredevelopment.backend.customexceptions.EmptyItemException;
 import com.bssoftwaredevelopment.backend.customexceptions.ItemByBarcodeNotFoundException;
 import com.bssoftwaredevelopment.backend.models.*;
 import com.bssoftwaredevelopment.backend.services.UuIdService;
@@ -104,6 +105,29 @@ class FridgeManagerServiceTest {
 
         //Then
         assertEquals(expectedItem, actualItem);
+    }
+
+    @Test
+    void throwExceptionIfItemIsEmpty(){
+        //Given
+        ItemToCreate emptyItem = new ItemToCreate(
+                "",
+                "",
+                "",
+                StorageLocation.FRIDGE,
+                1,
+                1,
+                StockUnit.PIECE,
+                ""
+        );
+
+        //When
+        try {
+        fridgeManagerService.createItem(emptyItem);
+        } catch (EmptyItemException e) {
+        //Then
+        assertEquals("Empty item can not be saved", e.getMessage());
+        }
     }
 
     @Test
