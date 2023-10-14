@@ -21,7 +21,7 @@ export default function UpdateItem() {
         stockUnit: StockUnit.PIECE
     })
     const navigate = useNavigate();
-
+    const [deleteQuestion, setDeleteQuestion] = useState(false);
 
     useEffect(() => {
         if (id) {
@@ -37,7 +37,6 @@ export default function UpdateItem() {
                 });
         }
     }, [id, navigate])
-
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         const newItem = {...itemToSave};
@@ -55,6 +54,21 @@ export default function UpdateItem() {
         axios
             .put(`/api/items/${id}`, itemToCreate)
             .then(() => toast.success("Product successfully updated"))
+            .catch((error) => {
+                toast.error("Something went wrong" + error);
+                console.log(error)
+            })
+            .finally(() => navigate("/"));
+    }
+
+    function handleDeleteOne() {
+        setDeleteQuestion(true)
+    }
+
+    function handleDeleteTwo() {
+        axios
+            .delete(`/api/items/${id}`)
+            .then(() => toast.success("Product successfully deleted"))
             .catch((error) => {
                 toast.error("Something went wrong" + error);
                 console.log(error)
@@ -116,6 +130,14 @@ export default function UpdateItem() {
                 <button type="submit">
                     Save Product to Database
                 </button>
+                <button type={"button"} onClick={handleDeleteOne}>Delete Item</button>
+                {deleteQuestion &&
+                    <>
+                        <div>Do you really want to delete this Item? This process cannot be undone!</div>
+                        <button type={"button"} onClick={handleDeleteTwo}>Yes</button>
+                        <button type={"button"} onClick={() => setDeleteQuestion(false)}>No</button>
+                    </>
+                }
             </Form>
         </Container>
     )

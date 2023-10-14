@@ -221,13 +221,12 @@ class FridgeManagerIntegrationTest {
         String itemUpdatedJson = objectMapper.writeValueAsString(itemUpdated);
 
 
-
         //When
         mockMvc.perform(
-                MockMvcRequestBuilders.put("/api/items/" + itemId)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(itemUpdatedJson)
-        )
+                        MockMvcRequestBuilders.put("/api/items/" + itemId)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(itemUpdatedJson)
+                )
                 //Then
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -240,5 +239,43 @@ class FridgeManagerIntegrationTest {
                 .andExpect(jsonPath("warnStockAmount").value(1))
                 .andExpect(jsonPath("stockUnit").value("PIECE"))
                 .andExpect(jsonPath("quantity").value("155 g"));
+    }
+
+    @Test
+    @DirtiesContext
+    void deleteItem() throws Exception {
+        //Given
+        ItemToCreate itemToCreate = new ItemToCreate(
+                "737628064502",
+                "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
+                "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
+                StorageLocation.FRIDGE,
+                1,
+                1,
+                StockUnit.PIECE,
+                "155 g"
+        );
+        String itemToCreateJson = objectMapper.writeValueAsString(itemToCreate);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/api/items")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(itemToCreateJson)
+        );
+
+        List<Item> items = fridgeManagerService.getAllItems();
+        String id = items.get(0).id();
+
+        //When
+        mockMvc.perform(
+                        MockMvcRequestBuilders.delete("/api/items/" + id)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                //Then
+                .andExpect(status().isOk());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/items"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isEmpty());
     }
 }
