@@ -6,10 +6,12 @@
 
 ## SonarCloud
 ### backend
-
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=ben-21_fridge-manager-backend&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=ben-21_fridge-manager-backend)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ben-21_fridge-manager-backend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ben-21_fridge-manager-backend)
 
 ### frontend
-
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=ben-21_fridge-manager-frontend&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=ben-21_fridge-manager-frontend)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ben-21_fridge-manager-frontend&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ben-21_fridge-manager-frontend)
 
 
 ## Table of Contents
