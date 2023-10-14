@@ -108,7 +108,7 @@ class FridgeManagerServiceTest {
     }
 
     @Test
-    void throwException_whenItemByIdNotExists(){
+    void throwException_whenItemByIdNotExists() {
         //When
         when(fridgeManagerRepo.existsById("0000"))
                 .thenReturn(false);
@@ -118,7 +118,7 @@ class FridgeManagerServiceTest {
     }
 
     @Test
-    void throwException_whenItemByIdNotFound(){
+    void throwException_whenItemByIdNotFound() {
         //When
         when(fridgeManagerRepo.existsById("0000"))
                 .thenReturn(true);
@@ -241,5 +241,18 @@ class FridgeManagerServiceTest {
         verify(fridgeManagerRepo).existsById(id);
         verify(fridgeManagerRepo).save(itemToUpdate);
         assertEquals(itemToUpdate, actualItem);
+    }
+
+    @Test
+    void deleteItem() {
+        //Given
+        String id = "0123";
+
+        //When
+        doNothing().when(fridgeManagerRepo).deleteById(id);
+        fridgeManagerService.deleteItemById(id);
+
+        //Then
+        verify(fridgeManagerRepo).deleteById(id);
     }
 }
