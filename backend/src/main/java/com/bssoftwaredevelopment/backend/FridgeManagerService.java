@@ -28,22 +28,22 @@ public class FridgeManagerService {
         return fridgeManagerWebclient.getOpenFoodFactsItem(barcode);
     }
 
-    public Item fetchItemByBarcode(String barcode){
-        if(fridgeManagerRepo.findByBarcode(barcode) != null){
+    public Item fetchItemByBarcode(String barcode) {
+        if (fridgeManagerRepo.findByBarcode(barcode) != null) {
             return fridgeManagerRepo.findByBarcode(barcode);
         }
         throw new ItemByBarcodeNotFoundException(barcode);
     }
 
-    public Item fetchItemById(String id){
-        if(fridgeManagerRepo.existsById(id)){
+    public Item fetchItemById(String id) {
+        if (fridgeManagerRepo.existsById(id)) {
             return fridgeManagerRepo.findById(id).orElseThrow(() -> new ItemByIdNotFoundException(id));
         }
         throw new ItemByIdNotFoundException(id);
     }
 
     public Item createItem(ItemToCreate itemToCreate) {
-        if(isItemEmpty(itemToCreate)){
+        if (isItemEmpty(itemToCreate)) {
             throw new EmptyItemException();
         }
         Item newItem = new Item(
@@ -60,6 +60,7 @@ public class FridgeManagerService {
         return fridgeManagerRepo.insert(newItem);
 
     }
+
     private boolean isItemEmpty(ItemToCreate itemToCreate) {
         return itemToCreate.barcode().isEmpty() ||
                 itemToCreate.name().isEmpty() ||
@@ -71,8 +72,8 @@ public class FridgeManagerService {
         return fridgeManagerRepo.findAll();
     }
 
-    public Item updateItem (String id, ItemToCreate itemToCreate){
-        if(fridgeManagerRepo.existsById(id)){
+    public Item updateItem(String id, ItemToCreate itemToCreate) {
+        if (fridgeManagerRepo.existsById(id)) {
             Item itemToSave = new Item(
                     id,
                     itemToCreate.barcode(),
@@ -87,5 +88,9 @@ public class FridgeManagerService {
             return fridgeManagerRepo.save(itemToSave);
         }
         throw new ItemByIdNotFoundException(id);
+    }
+
+    public void deleteItemById(String id) {
+        fridgeManagerRepo.deleteById(id);
     }
 }

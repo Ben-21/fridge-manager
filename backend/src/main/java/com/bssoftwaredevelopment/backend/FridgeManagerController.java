@@ -45,5 +45,11 @@ public class FridgeManagerController {
         return fridgeManagerService.updateItem(id, itemToCreate);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteItem(@PathVariable String id){
+        fridgeManagerService.deleteItemById(id);
+    }
+
+
 
 }
