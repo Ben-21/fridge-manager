@@ -23,7 +23,9 @@ export type ItemToCreate = {
 
 export type OpenFoodFactsItem = {
     code: string,
-    product: OpenFoodFactsProduct
+    product: OpenFoodFactsProduct,
+    status: number,
+    status_verbose: string
 }
 
 export type OpenFoodFactsProduct = {
