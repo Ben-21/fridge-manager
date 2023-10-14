@@ -37,11 +37,14 @@ class FridgeManagerServiceTest {
         //Given
         String barcode = "737628064502";
         OpenFoodFactsItem openFoodFactsItem = new OpenFoodFactsItem(
-                "0737628064502", new OpenFoodFactsProduct("0737628064502",
+                "0737628064502",
+                new OpenFoodFactsProduct(
+                        "0737628064502",
                 "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
                 "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
-                "155 g")
-        );
+                "155 g"),
+                1,
+                "product found");
 
         //When
         when(fridgeManagerWebclient.getOpenFoodFactsItem(barcode))

@@ -1,6 +1,7 @@
 import axios from "axios";
 import {OpenFoodFactsItem} from "../models/models.ts";
 import {useState} from "react";
+import {toast} from "react-toastify";
 
 
 type Props = {
@@ -16,7 +17,11 @@ export default function FetchOpenFoodFactsItem(props: Props) {
             .get("/api/items/openfoodapi/" + barcode)
             .then((response) => response.data)
             .then((data) => {
+                if(data.status === 0) {
+                    toast.error(data.status_verbose);
+                } else{
                 props.fetchData(data);
+                }
             })
             .catch(console.error)
             .finally(() => setBarcode(""));
