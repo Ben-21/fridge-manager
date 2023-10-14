@@ -4,7 +4,6 @@ import com.bssoftwaredevelopment.backend.models.Item;
 import com.bssoftwaredevelopment.backend.models.ItemToCreate;
 import com.bssoftwaredevelopment.backend.models.StockUnit;
 import com.bssoftwaredevelopment.backend.models.StorageLocation;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
