@@ -47,11 +47,11 @@ export default function ItemCard(props: Props) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center the content horizontally */
+  align-items: center; 
 `;
 
 const Fieldset = styled.fieldset`
-  border: 1px solid #ccc; /* Add your border style here */
+  border: 1px solid #ccc; 
   border-radius: 5px;
-  padding: 10px; /* Adjust the padding as needed */
+  padding: 10px; 
 `;

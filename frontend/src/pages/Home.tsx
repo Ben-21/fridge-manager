@@ -59,8 +59,8 @@ export default function Home() {
 }
 
 const ItemCardContainer = styled.fieldset`
-  border: 5px solid #ccc; /* Add your desired border style */
+  border: 5px solid #ccc; 
   border-radius: 5px;
-  margin: 10px; /* Add margin for spacing */
-  padding: 10px; /* Add padding as needed */
+  margin: 10px; 
+  padding: 10px; 
 `;
