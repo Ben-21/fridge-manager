@@ -170,6 +170,6 @@ const FormGroup = styled.div`
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; /* Add this line */
+    box-sizing: border-box; 
   }
 `;
