@@ -64,7 +64,7 @@ public class FridgeManagerService {
     private boolean isItemEmpty(ItemToCreate itemToCreate) {
         return itemToCreate.barcode().isEmpty() ||
                 itemToCreate.name().isEmpty() ||
-                itemToCreate.imageUrl().isEmpty() ||
+//                itemToCreate.imageUrl().isEmpty() ||
                 itemToCreate.quantity().isEmpty();
     }
 
