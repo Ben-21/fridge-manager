@@ -19,6 +19,7 @@ class FridgeManagerWebclientTest {
                 new OpenFoodFactsProduct(
                         "0737628064502",
                         "Thai peanut noodle kit includes stir-fry rice noodles & thai peanut seasoning",
+                        null,
                         "https://images.openfoodfacts.org/images/products/073/762/806/4502/front_en.6.400.jpg",
                         "155 g"),
                 1,

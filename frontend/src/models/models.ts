@@ -31,6 +31,7 @@ export type OpenFoodFactsItem = {
 export type OpenFoodFactsProduct = {
     id: string,
     product_name: string,
+    product_name_de: string,
     image_url: string,
     quantity: string
 }
