@@ -1,6 +1,6 @@
 import axios from "axios";
 import {OpenFoodFactsItem} from "../models/models.ts";
-import {useState} from "react";
+import React, {useState} from "react";
 import {toast} from "react-toastify";
 import styled from "@emotion/styled";
 
