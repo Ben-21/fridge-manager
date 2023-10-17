@@ -20,6 +20,7 @@ export default function AddItem() {
         stockUnit: StockUnit.PIECE
     }
     const [itemToSave, setItemToSave] = useState<ItemToCreate>(emptyItem);
+    const [productName, setProductName] = useState<string>("");
 
     const fetchOpenFoodFactsData = (childData: OpenFoodFactsItem) => {
         setOpenFoodFactsItem(childData)
@@ -35,16 +36,38 @@ export default function AddItem() {
         }));
     }
 
-    function adoptDataToItemToSave(newFields: Partial<ItemToCreate>) {
-        setItemToSave((prevITem) => ({
-            ...(prevITem),
-            ...newFields,
-        }));
+    function handleProductNameChange(event: React.ChangeEvent<HTMLSelectElement>) {
+        if (event.target.value === "INT" && openFoodFactsItem?.product.product_name) {
+            setProductName(openFoodFactsItem.product.product_name);
+        }
+        if (event.target.value === "DE" && openFoodFactsItem?.product.product_name_de) {
+            setProductName(openFoodFactsItem.product.product_name_de);
+        }
+    }
+
+    function adoptDataToItemToSave() {
+        if (productName === "") {
+            toast.error("Please select a product name")
+        } else {
+            const newFields: Partial<ItemToCreate> = {
+                barcode: openFoodFactsItem?.code,
+                name: productName,
+                imageUrl: openFoodFactsItem?.product.image_url,
+                quantity: openFoodFactsItem?.product.quantity,
+            }
+            setItemToSave((prevITem) => ({
+                ...(prevITem),
+                ...newFields,
+            }));
+            setProductName("");
+            setOpenFoodFactsItem(undefined);
+        }
     }
 
     function clearFields() {
         setOpenFoodFactsItem(undefined);
         setItemToSave(emptyItem);
+        setProductName("");
     }
 
     function saveItemToDatabase(event: React.FormEvent<HTMLFormElement>) {
@@ -84,28 +107,38 @@ export default function AddItem() {
                             <strong>Barcode:</strong> {openFoodFactsItem?.code}
                         </div>
                         <div>
-                            <strong>Name:</strong> {openFoodFactsItem?.product.product_name}
+                            <strong>Name International:</strong> {openFoodFactsItem?.product.product_name}
+                        </div>
+                        <div>
+                            <strong>Name DE:</strong> {openFoodFactsItem?.product.product_name_de}
                         </div>
                         <div>
                             <strong>Quantity:</strong> {openFoodFactsItem?.product.quantity}
                         </div>
+                        <br/>
+                        <FormGroup>
+                            <label htmlFor="productName">Choose Product Name:</label>
+                            <select name="productName" value={productName} onChange={handleProductNameChange}>
+                                <option value="">-- Select an option --</option>
+                                <option value="INT">Name International</option>
+                                <option value="DE">Name DE</option>
+                            </select>
+                        </FormGroup>
                         <button
-                            type="button"
-                            onClick={() =>
-                                adoptDataToItemToSave({
-                                    barcode: openFoodFactsItem?.code,
-                                    name: openFoodFactsItem?.product.product_name,
-                                    imageUrl: openFoodFactsItem?.product.image_url,
-                                    quantity: openFoodFactsItem?.product.quantity,
-                                })
-                            }
-                        >
+                            type="button" onClick={adoptDataToItemToSave}>
                             Adopt Data
                         </button>
                     </div>
                 )}
                 <hr/>
                 <Form onSubmit={saveItemToDatabase}>
+                    {itemToSave.imageUrl &&
+                        <FormGroup>
+                            <label htmlFor="image_url">Product Image:</label>
+                            <br/>
+                            <img src={itemToSave.imageUrl} alt={"Product Image"}/>
+                        </FormGroup>
+                    }
                     <FormGroup>
                         <label htmlFor="barcode">Product Barcode:</label>
                         <input name="barcode" type="text" value={itemToSave?.barcode} onChange={handleChange} required/>
@@ -183,6 +216,6 @@ const FormGroup = styled.div`
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
   }
 `;
