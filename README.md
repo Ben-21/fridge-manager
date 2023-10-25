@@ -16,8 +16,8 @@
 
 ## Table of Contents
 
-- [CI / CD](#ci--cd)
 - [Overview](#overview)
+- [CI / CD](#ci--cd)
 - [Wireframes](#wireframes)
 - [Models / Database-Structure](#models-and-database-structure)
 - [Tech Stack](#tech-stack)
@@ -25,19 +25,18 @@
 - [Usage](#usage)
 - [License](#license)
 
-## CI / CD
-The project runs on my own cloud server and is developed using continous integration and contionous deployment. For this I set up a  NGINX-Webserver and a Docker Environment. My App, the NGINX-Webserver and Certbot (for SSL Certificates) run as a container. All is configured and started using one Docker-Compose file. 
-CI and CD is triggered by merging a branch into the Main-Branch. For both I used Github Actions (build with Maven and SonarCloud for CI - own yml. Files for CD to my DigitalOcean Cloudserver).
-
 ## Overview
 
 The deployed project can be found at [Fridge Manager](https://fridge-manager.schaefer-inet.de)  
-The app is **only for mobile view** designed - please use your phone or switch your browser, via inspect/ dev-tools, to mobile view.
+**Please consider that the main focus of the app is on the backend. The frontend is only designed to represent the functional character of the app.**
 
 Title: Fridge Manager - A Web Application for managing your Grocery Stocks
 
 Summary:
 
+## CI / CD
+The project runs on my own cloud server and is developed using continous integration and contionous deployment. For this I set up a  NGINX-Webserver and a Docker Environment. My App, the NGINX-Webserver and Certbot (for SSL Certificates) run as a container. All is configured and started using one Docker-Compose file. 
+CI and CD is triggered by merging a branch into the Main-Branch. For both I used Github Actions (build with Maven and SonarCloud for CI - own yml. Files for CD to my DigitalOcean Cloudserver).
 
 ## Wireframes
 
